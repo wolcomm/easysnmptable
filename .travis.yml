@@ -1,19 +1,27 @@
 language: python
 python:
-  - "2.7"
-  - "3.4"
-  - "3.5"
-  - "3.6"
+- '2.7'
+- '3.4'
+- '3.5'
+- '3.6'
 matrix:
   fast_finish: true
 before_install:
-  - sudo apt-get -qq update
-  - sudo apt-get -qq install libsnmp-dev snmp-mibs-downloader
+- sudo apt-get -qq update
+- sudo apt-get -qq install libsnmp-dev snmp-mibs-downloader
 install:
-  - pip install -U pip
-  - pip install -U setuptools
-  - pip install tox-travis codecov
+- pip install -U pip
+- pip install -U setuptools
+- pip install tox-travis codecov
 script:
-  - tox
+- tox
 after_success:
-  - codecov
+- codecov
+deploy:
+  provider: pypi
+  user: benmaddison
+  distributions: "sdist bdist_wheel"
+  password:
+    secure: fPM9qk+yPe8jK9r3Pd34ovrZXFf4n757PNWp0EwdSbEZe+6tyqpl+9eT3drdRRBISEwjgendPQ8rvii3wUbujIHugkmhqdj1N4fp/+XA1OChDpqnDKymIQBDPvSWgAKhYYf/mVy0AAbxaCmjy+vNoWMk+Rm1euMludi5vZBpOZia+M1zPsGe49aq4lvVugnsdns6/IWjnmK+Vye5u3Lo00Xj8YIM+wrv9+gLj4NHp6A+bdX8tlmFYDDnlQewehdf07qBywZgHOLoonFMm1UBUfeM6/JvnlQUlsuqZzkrLdnolMAhMjPpwW07G21eBdfWEi88y6aEedG4ILcsD0rpciJYl5n7W/EwF1Gowr3i4MAoOd4ouIgxRA6j+mfsq/yfqkHMfDtBhYcyYTu0Z47bunUKOqQPRolkbcBx+9XHSkOadOBEOnVMcejRUHOlJKqadaxBUcI1bw3LForC0UddgdMD7dfSx+d6uMfZgZ1pLWDvbcBQ7PYZb00a6zV6NNDBn2UAxGptistuHisaSLnjFrA2cJ5+zc5/UlMhU1ZssDPTZjrzadFEtKMRuxBj7ARgVK+8Zcd0MptGYNN0vbRJWcAEWEgVvcvY4oHIkUQEQiswvlIBSIdv6GtHdKpN9LI+V+AlZCAk1psZyWt9ewzJbEGgsUViKWDbT80hbuz+CL4=
+  on:
+    tags: true
