@@ -19,19 +19,29 @@ from __future__ import unicode_literals
 
 from setuptools import find_packages, setup
 
+descr = "An extension to easysnmp providing table handling and other features."
+
 with open('packaging/VERSION') as f:
     version = f.read().strip()
 with open('packaging/requirements.txt') as f:
     requirements = f.read().split("\n")
+
+try:
+    import pypandoc
+    readme = pypandoc.convert_file('README.md', 'rst', format='md')
+except (ImportError, RuntimeError) as e:
+    print("README conversion failed: {}".format(e))
+    readme = None
+
 
 setup(
     name='easysnmptable',
     version=version,
     author='Workonline Communications',
     author_email='communications@workonkonline.co.za',
-    description='An extension to easysnmp providing table handling.',
-    long_description='',
-    license='LICENSE',
+    description=descr,
+    long_description=readme,
+    license='Apache-2.0',
     classifiers=[
         'Development Status :: 4 - Beta',
         'Intended Audience :: Developers',
