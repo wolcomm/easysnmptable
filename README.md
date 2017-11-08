@@ -21,9 +21,7 @@ $ pip install easysnmptable
 ```python
 from easysnmptable import Session
 
-with Session(hostname='localhost',
-             community='public',
-             version=2) as session:
+with Session(hostname='localhost', community='public', version=2) as session:
   iftable = session.gettable('ifTable')
 
 for index, row in table.rows.items():
