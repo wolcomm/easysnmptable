@@ -1,0 +1,18 @@
+language: python
+python:
+  - "2.7"
+  - "3.4"
+  - "3.5"
+  - "3.6"
+sudo: false
+matrix:
+  fast_finish: true
+  allow_failures: []
+install:
+  - pip install -U pip
+  - pip install -U setuptools
+  - pip install tox-travis codecov
+script:
+  - tox
+after_success:
+  - codecov
